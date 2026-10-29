@@ -1,0 +1,73 @@
+---
+// Encargos (tartas, bandejas, desayunos para llevar): banda clara con la foto (`imagen`) a sangre hasta el borde
+// izquierdo y, al lado, antetítulo, título, texto, los pasos (`items` {titulo, texto}) con círculo numerado,
+// los botones (`cta`, normalmente WhatsApp; sin él, WhatsApp o teléfono de contacto; `cta_secundario` opcional)
+// y una `nota`. Sin foto, el texto ocupa la banda a dos columnas.
+import { seccion, site, tel, whatsapp, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const principal = s?.cta?.url
+  ? s.cta
+  : c.whatsapp
+    ? { texto: 'Encargar por WhatsApp', url: whatsapp(c.whatsapp, `Hola, quiero hacer un encargo en ${site.nombre}`) }
+    : c.telefono
+      ? { texto: c.telefono, url: tel(c.telefono) }
+      : null;
+const secundario = s?.cta_secundario?.url ? s.cta_secundario : null;
+const externo = (u: string) => /^https?:/.test(u);
+---
+
+{
+  s && (
+    <Banda id={Astro.props.id} color="clara" class="banda--sin-relleno" contenedor={false}>
+      <div class:list={[s.imagen ? 'mitades mitades--foto-izq' : 'contenedor py-[var(--ritmo)] md:py-[var(--ritmo-md)]']}>
+        <div class:list={[s.imagen ? 'mitad-texto' : 'grid gap-8 lg:grid-cols-2 lg:gap-20']}>
+          <div>
+            <Titular antetitulo={s.antetitulo} titulo={s.titulo} class="titular--pegado" />
+            {parrafos(s.texto).length > 0 && (
+              <div class="mt-5 space-y-3 text-[1.08rem]">
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+            )}
+          </div>
+          <div>
+            {s.items.length > 0 && (
+              <ol class="pasos">
+                {s.items.map((it, i) => (
+                  <li>
+                    <span class="pasos-num" aria-hidden="true">{i + 1}</span>
+                    <div>
+                      <p class="pasos-titulo">{it.titulo}</p>
+                      {it.texto && <p class="pasos-texto">{it.texto}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            )}
+            {(principal || secundario) && (
+              <div class="botones">
+                {principal && (
+                  <a class="btn" href={principal.url} {...(externo(principal.url) && { rel: 'noopener', target: '_blank' })}>{principal.texto}</a>
+                )}
+                {secundario && (
+                  <a class="btn-sec text-primario" href={secundario.url} {...(externo(secundario.url) && { rel: 'noopener', target: '_blank' })}>{secundario.texto}</a>
+                )}
+              </div>
+            )}
+            {s.nota && <p class="nota">{s.nota}</p>}
+          </div>
+        </div>
+        {s.imagen && (
+          <div class="mitad-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1400} />
+          </div>
+        )}
+      </div>
+    </Banda>
+  )
+}

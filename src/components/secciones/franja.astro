@@ -1,0 +1,54 @@
+---
+// Franja de fotos a sangre: cabeza con antetítulo, título y texto, y debajo las fotos de `galeria` (lista de rutas)
+// de borde a borde de la ventana, sin márgenes. Cada foto lleva encima el pie de `items` en la misma posición
+// ({titulo, texto}: la primera ficha va con la primera foto…; un `imagen` en la ficha manda sobre la galería).
+// 1 columna en móvil, 2 en tableta, todas en fila en escritorio (hasta 4). Una ficha sin foto se pinta en café.
+import { seccion } from '../../data/site';
+import { altFicha, altGaleria } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((it) => it && (it.titulo || it.texto || it.imagen)) : [];
+const total = s ? Math.min(Math.max(items.length, s.galeria.length), 8) : 0;
+const fotos = Array.from({ length: total }, (_, i) => {
+  const it = items[i];
+  const imagen = it?.imagen || s?.galeria[i] || '';
+  return { titulo: it?.titulo ?? '', texto: it?.texto ?? '', imagen, alt: it?.titulo ? altFicha(it) : altGaleria(i) };
+});
+const n = Math.min(Math.max(fotos.length, 1), 4);
+---
+
+{
+  s && (
+    <Banda id={Astro.props.id} color="crema" class="banda--sin-relleno" contenedor={false}>
+      {(s.titulo || s.antetitulo || s.texto) && (
+        <div class="contenedor cabeza pt-[var(--ritmo)] md:pt-[var(--ritmo-md)]">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+        </div>
+      )}
+      {fotos.length > 0 ? (
+        <ul
+          class:list={['franja-fotos', { 'franja-fotos--impar': fotos.length % 2 === 1 && fotos.length > 1, 'franja-fotos--uno': fotos.length === 1 }]}
+          style={`--n:${n}`}
+        >
+          {fotos.map((f) => (
+            <li class="franja-foto">
+              {f.imagen && <Imagen src={f.imagen} alt={f.alt} ancho={900} alto={1125} />}
+              {(f.titulo || f.texto) && (
+                <div class="franja-pie">
+                  {f.titulo && <h3 class="franja-titulo">{f.titulo}</h3>}
+                  {f.texto && <p class="franja-texto">{f.texto}</p>}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="pb-[var(--ritmo)]" />
+      )}
+    </Banda>
+  )
+}

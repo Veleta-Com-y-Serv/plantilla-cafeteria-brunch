@@ -1,0 +1,93 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: cafeteria-brunch
+nombre: Cafetería y brunch
+descripcion: "Web cálida y a todo color para cafeterías, brunch, pastelerías y panaderías, con carta y horario."
+sectores:
+  - { id: cafeteria, nombre: Cafetería }
+  - { id: brunch, nombre: Brunch }
+  - { id: pasteleria, nombre: Pastelería }
+  - { id: heladeria, nombre: Heladería }
+  - { id: panaderia, nombre: Panadería }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: franja, nombre: El local }
+  - { id: carta, nombre: Carta }
+  - { id: sobre, nombre: Nosotros }
+  - { id: galeria, nombre: Fotos }
+  - { id: horario, nombre: Horario }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: encargos, nombre: Encargos }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: contacto, nombre: Contacto }
+estilo: calido
+plan_minimo: gratis
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-cafeteria-brunch.noexpertise.com
+activa: true
+orden: 220
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu cafetería"
+    pregunta: "¿Cómo se llama tu cafetería, pastelería o panadería y qué la hace especial?"
+    ayuda: "Por ejemplo: café de especialidad, brunch, tartas caseras o pan de masa madre, y en qué barrio estáis."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿Dónde estáis y cómo os pueden llamar, escribir o reservar?"
+    ayuda: "Solo lo que quieras que vean tus clientes. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: carta
+    titulo: "Tu carta"
+    pregunta: "Cuéntame lo que servís: uno por línea, con el precio si quieres."
+    ayuda: "Puedes poner delante la parte de la carta (Desayunos, Brunch, Dulces, Bebidas). Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.carta.platos]
+  - id: brunch
+    titulo: "Brunch o desayuno completo"
+    pregunta: "¿Tenéis un brunch o un desayuno cerrado? Cuéntame qué incluye, cuándo y cuánto cuesta."
+    ayuda: "Si no tenéis, salta este paso."
+    tipo: texto
+    campos: [secciones.carta.titulo, secciones.carta.texto, secciones.carta.menu_dia.titulo, secciones.carta.menu_dia.precio, secciones.carta.menu_dia.texto]
+  - id: sobre
+    titulo: "Quiénes sois"
+    pregunta: "¿Quién está detrás y qué os hace distintos? Desde cuándo, cómo trabajáis, de dónde viene el producto."
+    tipo: texto
+    campos: [secciones.sobre.titulo, secciones.sobre.declaracion, secciones.sobre.texto, secciones.sobre.items]
+  - id: horario
+    titulo: "Horario"
+    pregunta: "¿Qué días y a qué horas abrís?"
+    ayuda: "Por ejemplo: de martes a viernes, de 8:30 a 13:30; sábados y domingos, de 9:30 a 14:30; lunes cerrado."
+    tipo: lista
+    campos: [secciones.horario.horario]
+  - id: encargos
+    titulo: "Encargos"
+    pregunta: "¿Hacéis tartas, bandejas o pedidos por encargo? Cuéntame qué y cómo se piden."
+    ayuda: "Si no hacéis encargos, salta este paso y luego oculta el apartado en Contenido."
+    tipo: texto
+    campos: [secciones.encargos.titulo, secciones.encargos.texto, secciones.encargos.items, secciones.encargos.nota]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan más a menudo? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Por ejemplo: si hay que reservar, opciones sin gluten, leches vegetales o si se puede ir con perro."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada y, si quieres, las de tu local, tu carta y tu galería."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.franja.galeria, secciones.carta.imagen, secciones.sobre.imagen, secciones.encargos.imagen, secciones.galeria.galeria]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

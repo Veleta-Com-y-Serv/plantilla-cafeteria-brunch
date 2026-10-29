@@ -1,0 +1,42 @@
+---
+// Galería tipo Instagram a borde completo: cabeza en banda espresso (título y botón a Instagram) y debajo
+// las fotos de `galeria` en cuadrados sin márgenes de borde a borde (2 columnas en móvil, 3 en tableta y,
+// en escritorio, 6 si hay seis fotos o 4 si hay cuatro u ocho). El botón usa `cta` o, si no hay, `redes.instagram`.
+import { seccion, site } from '../../data/site';
+import { altGaleria } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const boton = s?.cta?.url ? s.cta : site.redes.instagram ? { texto: 'Síguenos en Instagram', url: site.redes.instagram } : null;
+const n = s?.galeria.length ?? 0;
+const variante = n === 6 || n === 12 || n === 18 ? 'rejilla-fotos--seis' : n === 4 ? 'rejilla-fotos--cuatro' : n === 8 || n === 16 ? 'rejilla-fotos--ocho' : '';
+---
+
+{
+  s && (
+    <Banda id={Astro.props.id} color="oscura" class="sin-abajo" contenedor={false}>
+      <div class="contenedor galeria-cabeza">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {boton && (
+          <a class="btn btn--mostaza" href={boton.url} {...(/^https?:/.test(boton.url) && { rel: 'noopener', target: '_blank' })}>
+            <Icono nombre="instagram" tam={20} /> {boton.texto}
+          </a>
+        )}
+      </div>
+      {n > 0 ? (
+        <ul class:list={['rejilla-fotos', variante]}>
+          {s.galeria.map((foto, i) => (
+            <li>
+              <Imagen src={foto} alt={altGaleria(i)} ancho={800} alto={800} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="pb-[var(--ritmo)]" />
+      )}
+    </Banda>
+  )
+}

@@ -1,0 +1,51 @@
+---
+// Sobre nosotros: mitad de texto (antetítulo, título, `declaracion` grande en mostaza, `texto` en párrafos con
+// una línea en blanco entre ellos, `items` como valores con círculo numerado y `cta` opcional) y mitad de foto
+// (`imagen`) a sangre hasta el borde derecho. Sin foto, el texto ocupa la banda a dos columnas.
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <Banda id={Astro.props.id} color="crema" class="banda--sin-relleno" contenedor={false}>
+      <div class:list={[s.imagen ? 'mitades' : 'contenedor py-[var(--ritmo)] md:py-[var(--ritmo-md)]']}>
+        <div class:list={[s.imagen ? 'mitad-texto' : 'grid gap-8 lg:grid-cols-2 lg:gap-20']}>
+          <div>
+            <Titular antetitulo={s.antetitulo} titulo={s.titulo} class="titular--pegado" />
+            {s.declaracion && <p class="declaracion">{s.declaracion}</p>}
+          </div>
+          <div>
+            {parrafos(s.texto).length > 0 && (
+              <div class="mt-6 space-y-4 text-[1.06rem] leading-relaxed">
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+            )}
+            {s.items.length > 0 && (
+              <ul class="valores">
+                {s.items.map((it, i) => (
+                  <li>
+                    <span class="valores-num" aria-hidden="true">{i + 1}</span>
+                    <h3 class="valores-titulo">{it.titulo}</h3>
+                    {it.texto && <p class="valores-texto">{it.texto}</p>}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.cta?.url && <a class="btn mt-9" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        </div>
+        {s.imagen && (
+          <div class="mitad-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1400} />
+          </div>
+        )}
+      </div>
+    </Banda>
+  )
+}

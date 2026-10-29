@@ -1,0 +1,182 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas siempre planas (nunca una lista dentro de un elemento de lista). Precios siempre entre comillas.
+nombre: Café Almendro
+eslogan: Desayunos, brunch y repostería casera en el Realejo de Granada.
+sector: cafeteria
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#5a3423"
+  acento: "#e0a526"
+  fondo: "#f6ecda"
+  texto: "#2a1b12"
+contacto:
+  telefono: "958 21 47 36"
+  email: hola@cafealmendro.es
+  direccion: Calle Santiago 14, 18009 Granada (Granada)
+  horario: "De martes a viernes, de 8:30 a 13:30 y de 17:00 a 20:30. Sábados y domingos, de 9:30 a 14:30."
+  whatsapp: "+34 654 21 47 36"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Carta, url: "/#carta" }
+  - { texto: Nosotros, url: "/#sobre" }
+  - { texto: Fotos, url: "/#galeria" }
+  - { texto: Horario, url: "/#horario" }
+  - { texto: Encargos, url: "/#encargos" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Reservar brunch, url: "/#contacto" }
+seo:
+  titulo: Café Almendro · Cafetería y brunch en el Realejo, Granada
+  descripcion: "Cafetería en el Realejo de Granada: café de especialidad, tostadas, brunch los fines de semana y tartas caseras por encargo."
+  tipo: CafeOrCoffeeShop
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: "Calle Santiago, 14 · Realejo"
+    titulo: Desayunos sin prisa en el Realejo
+    texto: "Café recién tostado, pan de masa madre y tartas que salen del horno cada mañana. Y los fines de semana, brunch hasta las dos y media."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Ver la carta, url: "/#carta" }
+    cta_secundario: { texto: Reservar brunch, url: "/#contacto" }
+    items:
+      - { titulo: Café de especialidad }
+      - { titulo: Masa madre }
+      - { titulo: Tartas caseras }
+      - { titulo: Brunch el fin de semana }
+      - { titulo: Opciones sin gluten }
+
+  franja:
+    activa: true
+    antetitulo: El café
+    titulo: Una barra, seis mesas y mucho café
+    texto: "Un local pequeño con luz de mañana, donde te preparamos el café a tu gusto y la tostada al momento."
+    items:
+      - { titulo: La barra, texto: "Espresso, filtro y leches vegetales sin coste extra." }
+      - { titulo: La mesa, texto: "Desayunos completos para empezar el día con calma." }
+      - { titulo: El obrador, texto: "Bizcochos, cookies y tartas hechos aquí cada mañana." }
+    galeria:
+      - /fotos/barra.jpg
+      - /fotos/mesa.jpg
+      - /fotos/obrador.jpg
+
+  carta:
+    activa: true
+    antetitulo: La carta
+    titulo: Para desayunar, para picar y para darte un capricho
+    texto: "Cambiamos las tartas cada semana. Pregúntanos por las opciones sin gluten y sin lactosa."
+    imagen: /fotos/brunch.jpg
+    marca_destacado: Favorito de la casa
+    menu_dia:
+      titulo: Brunch del finde
+      precio: "18,50 €"
+      texto: |
+        Sábados y domingos, de 9:30 a 14:30
+        Zumo de naranja natural y café o infusión
+        Un plato salado a elegir de la carta de brunch
+        Tostada de masa madre o bol de yogur con granola
+        Porción de tarta del día
+    platos:
+      - { nombre: Tostada de tomate y aceite de la Alpujarra, texto: "Pan de masa madre, tomate rallado y aceite de oliva virgen extra.", precio: "3,50 €", categoria: Desayunos }
+      - { nombre: Tostada de aguacate y huevo poché, texto: "Con semillas, lima y un toque de chile.", precio: "7,50 €", categoria: Desayunos, destacado: true }
+      - { nombre: Bol de yogur con granola casera, texto: "Fruta de temporada y miel de la Contraviesa.", precio: "6,00 €", categoria: Desayunos }
+      - { nombre: Croissant de mantequilla, texto: "Solo o con mermelada casera.", precio: "2,20 €", categoria: Desayunos }
+      - { nombre: Huevos Benedict, texto: "Sobre muffin casero, con jamón asado y salsa holandesa.", precio: "11,50 €", categoria: Brunch, destacado: true }
+      - { nombre: Tortitas con frutos rojos, texto: "Tres tortitas esponjosas, nata montada y sirope de arce.", precio: "9,00 €", categoria: Brunch }
+      - { nombre: Shakshuka en sartén, texto: "Huevos al horno en salsa de tomate especiada, con pan para mojar.", precio: "10,50 €", categoria: Brunch }
+      - { nombre: Sándwich de pastrami, texto: "Pan de centeno, pepinillos y mostaza de la casa.", precio: "10,00 €", categoria: Brunch }
+      - { nombre: Tarta de queso al horno, texto: "Cremosa por dentro y tostada por fuera.", precio: "4,80 €", categoria: Dulces del obrador, destacado: true }
+      - { nombre: Carrot cake, texto: "Con frosting de queso y nueces.", precio: "4,50 €", categoria: Dulces del obrador }
+      - { nombre: Cookie de chocolate y avellana, precio: "2,80 €", categoria: Dulces del obrador }
+      - { nombre: Bizcocho de limón y amapola, texto: "Sin gluten.", precio: "3,20 €", categoria: Dulces del obrador }
+      - { nombre: Espresso, precio: "1,40 €", categoria: Café y bebidas }
+      - { nombre: Flat white, texto: "Doble de café con leche texturizada.", precio: "2,60 €", categoria: Café y bebidas }
+      - { nombre: Café de filtro del día, texto: "Pregunta qué origen tenemos esta semana.", precio: "2,80 €", categoria: Café y bebidas }
+      - { nombre: Chocolate a la taza, precio: "2,90 €", categoria: Café y bebidas }
+      - { nombre: Zumo de naranja natural, precio: "3,20 €", categoria: Café y bebidas }
+
+  sobre:
+    activa: true
+    antetitulo: Nosotros
+    titulo: Un café de barrio con horno propio
+    declaracion: "Lo hacemos todo aquí, cada mañana, y sin atajos."
+    texto: |
+      Café Almendro abrió en 2019 en una casa antigua de la calle Santiago, a dos pasos del Campo del Príncipe. Lo llevamos Lucía, en el obrador, y Andrés, detrás de la barra.
+
+      El café lo tuesta un pequeño tostador andaluz y lo cambiamos según la temporada. El pan es de masa madre y fermenta toda la noche.
+
+      Las tartas, los bizcochos y las mermeladas salen de nuestro horno. Si algo se acaba, se acaba: mañana habrá más.
+    imagen: /fotos/nosotros.jpg
+    items:
+      - { titulo: Hecho aquí, texto: "Bizcochos, tartas, granola y mermeladas del obrador de la casa." }
+      - { titulo: Producto cercano, texto: "Aceite, miel y fruta de la provincia de Granada." }
+      - { titulo: Para todos, texto: "Opciones sin gluten, sin lactosa y veganas cada día." }
+
+  galeria:
+    activa: true
+    antetitulo: "@cafealmendro"
+    titulo: Así es una mañana en el Almendro
+    galeria:
+      - /fotos/galeria-1.jpg
+      - /fotos/galeria-2.jpg
+      - /fotos/galeria-3.jpg
+      - /fotos/galeria-4.jpg
+      - /fotos/galeria-5.jpg
+      - /fotos/galeria-6.jpg
+    cta: { texto: Síguenos en Instagram, url: "https://www.instagram.com/" }
+
+  horario:
+    activa: true
+    antetitulo: Horario
+    titulo: Abrimos temprano
+    texto: "La cocina de brunch funciona hasta media hora antes de cerrar. Los lunes descansamos."
+    horario:
+      - { dia: Lunes, horas: Cerrado }
+      - { dia: Martes a viernes, horas: "8:30 – 13:30 y 17:00 – 20:30" }
+      - { dia: Sábados, horas: "9:30 – 14:30" }
+      - { dia: Domingos, horas: "9:30 – 14:30" }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que dicen de nosotros
+    testimonios:
+      - { texto: "La tarta de queso es la mejor que he probado en Granada y el flat white, de diez. Vamos cada domingo.", autor: Marina L., nota: Google }
+      - { texto: "Sitio pequeño y acogedor, con un trato muy cercano. Los huevos Benedict, espectaculares.", autor: Jorge P., nota: Google }
+      - { texto: "Encargamos la tarta del cumpleaños de mi hija y fue un éxito. Muy atentos con la alergia a los frutos secos.", autor: Carmen R. }
+
+  encargos:
+    activa: true
+    antetitulo: Por encargo
+    titulo: Tartas y bandejas para tus celebraciones
+    texto: "Cumpleaños, desayunos de empresa o una merienda en casa. Te preparamos tartas enteras, bandejas de bollería y cajas de desayuno para llevar."
+    imagen: /fotos/encargos.jpg
+    items:
+      - { titulo: Elige qué quieres, texto: "Una tarta de la carta, una bandeja dulce o salada, o algo especial." }
+      - { titulo: Dinos el día, texto: "Con 48 horas de antelación, y si hay alergias o intolerancias." }
+      - { titulo: Recógelo en el café, texto: "Te lo dejamos listo a la hora que nos digas." }
+    cta: { texto: Encargar por WhatsApp, url: "https://wa.me/34654214736?text=Hola%2C%20quiero%20hacer%20un%20encargo" }
+    cta_secundario: { texto: Escríbenos, url: "/#contacto" }
+    nota: "Tartas enteras de 8 a 12 raciones. Para pedidos grandes, mejor por teléfono."
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Antes de venir
+    preguntas:
+      - { pregunta: "¿Hace falta reservar para el brunch?", respuesta: "Los sábados y domingos, sí: tenemos seis mesas y se llenan. Entre semana suele haber sitio sin reservar." }
+      - { pregunta: "¿Tenéis opciones sin gluten?", respuesta: "Sí. Cada día hay al menos un dulce sin gluten y pan sin gluten para las tostadas. Avísanos si eres celíaco y lo preparamos aparte." }
+      - { pregunta: "¿Hay leches vegetales?", respuesta: "Sí, de avena, almendra y soja, sin coste extra en cualquier café." }
+      - { pregunta: "¿Con cuánta antelación se encarga una tarta?", respuesta: "Con 48 horas basta para casi todas. Para tartas personalizadas o pedidos grandes, mejor con una semana." }
+      - { pregunta: "¿Se puede ir con perro?", respuesta: "Sí, en la terraza y dentro del local si es tranquilo. Tenemos agua para ellos en la puerta." }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Escríbenos o pásate a vernos
+    texto: "Reservas de brunch, encargos o cualquier pregunta. Te contestamos enseguida."

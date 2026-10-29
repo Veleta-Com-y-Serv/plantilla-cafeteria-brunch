@@ -1,0 +1,58 @@
+---
+// Horario en grande: banda mostaza a todo el ancho con festón de toldo. A la izquierda, antetítulo, título, texto,
+// la dirección de site.yaml → contacto y los botones «Cómo llegar» y teléfono; a la derecha, `horario` [{dia, horas}]
+// con las horas en cifras enormes (una fila «Cerrado» sale más apagada). Sin `horario`, se usa `contacto.horario`.
+// Sin iframe de mapa, para que la web vaya rápida.
+import { seccion, site, mapa, tel } from '../../data/site';
+import Banda from '../ui/Banda.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const filas = s ? s.horario.filter((h) => h && (h.dia || h.horas)) : [];
+const cerrado = (h: string) => /cerrad/i.test(h ?? '');
+---
+
+{
+  s && (
+    <Banda id={Astro.props.id} color="mostaza" feston>
+      <div class="horario-rejilla">
+        <div>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          {c.direccion && (
+            <p class="direccion">
+              <Icono nombre="mapa" class="mt-1 shrink-0" />
+              <span>{c.direccion}</span>
+            </p>
+          )}
+          {(c.direccion || c.telefono) && (
+            <div class="botones">
+              {c.direccion && (
+                <a class="btn" href={mapa(c.direccion)} rel="noopener" target="_blank">Cómo llegar</a>
+              )}
+              {c.telefono && <a class="btn-sec" href={tel(c.telefono)}>{c.telefono}</a>}
+            </div>
+          )}
+        </div>
+        <div>
+          {filas.length > 0 ? (
+            <table class="horario">
+              <caption class="sr-only">Horario</caption>
+              <tbody>
+                {filas.map((h) => (
+                  <tr class:list={{ cerrado: cerrado(h.horas) }}>
+                    <th scope="row">{h.dia}</th>
+                    <td>{h.horas}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            c.horario && <p class="horario-suelto">{c.horario}</p>
+          )}
+        </div>
+      </div>
+    </Banda>
+  )
+}

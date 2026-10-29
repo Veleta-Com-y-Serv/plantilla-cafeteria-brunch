@@ -1,0 +1,78 @@
+---
+// Portada partida 50/50 a sangre: a la izquierda, banda mostaza con el título enorme redondeado, un párrafo
+// corto y dos botones píldora; a la derecha, la foto hasta el borde de la ventana con un sello redondo que gira.
+// Debajo, una cinta corrida a todo el ancho con los `items` (solo `titulo`). En móvil, la foto va debajo del texto.
+// Sin `imagen`, la portada es toda mostaza. Sin `cta`, el primer botón llama; sin `cta_secundario`, lleva al mapa.
+import { seccion, site, tel, mapa } from '../../data/site';
+import { altHero } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const principal = s?.cta?.url ? s.cta : c.telefono ? { texto: c.telefono, url: tel(c.telefono) } : null;
+const secundario = s?.cta_secundario?.url
+  ? s.cta_secundario
+  : c.direccion
+    ? { texto: 'Cómo llegar', url: mapa(c.direccion) }
+    : null;
+const externo = (u: string) => /^https?:/.test(u);
+const detalles = (s?.items ?? []).map((it) => String(it?.titulo ?? '').trim()).filter(Boolean);
+// La cinta repite los detalles hasta llenar el ancho y se duplica para que el bucle no tenga corte.
+const tanda = detalles.length ? Array.from({ length: Math.max(2, Math.ceil(8 / detalles.length)) }, () => detalles).flat() : [];
+const aro = [site.nombre, ...detalles.slice(0, 2)].join(' · ') + ' · ';
+---
+
+{
+  s && (
+    <section id={id} class:list={['portada', { 'portada--con-foto': s.imagen }]}>
+      <div class="portada-texto">
+        {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+        <h1 class="portada-titulo">{s.titulo || site.nombre}</h1>
+        {s.texto && <p class="portada-parrafo">{s.texto}</p>}
+        {(principal || secundario) && (
+          <div class="botones">
+            {principal && (
+              <a class="btn" href={principal.url} {...(externo(principal.url) && { rel: 'noopener', target: '_blank' })}>
+                {principal.texto}
+              </a>
+            )}
+            {secundario && (
+              <a class="btn-sec" href={secundario.url} {...(externo(secundario.url) && { rel: 'noopener', target: '_blank' })}>
+                {secundario.texto}
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+      {s.imagen && (
+        <div class="portada-foto">
+          <Imagen src={s.imagen} alt={altHero()} ancho={1400} alto={1600} prioridad={primera} />
+          <div class="sello" aria-hidden="true">
+            <svg class="sello-aro" viewBox="0 0 160 160">
+              <defs>
+                <path id={`${id}-aro`} d="M80 80m-62 0a62 62 0 1 1 124 0a62 62 0 1 1-124 0" />
+              </defs>
+              <text>
+                <textPath href={`#${id}-aro`} textLength="388">{aro}</textPath>
+              </text>
+            </svg>
+            <Icono nombre="taza" class="sello-centro" />
+          </div>
+        </div>
+      )}
+      {tanda.length > 0 && (
+        <div class="cinta">
+          <ul class="sr-only">
+            {detalles.map((d) => <li>{d}</li>)}
+          </ul>
+          <div class="cinta-pista" aria-hidden="true">
+            <ul class="cinta-grupo">{tanda.map((d) => <li>{d}</li>)}</ul>
+            <ul class="cinta-grupo">{tanda.map((d) => <li>{d}</li>)}</ul>
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
