@@ -58,3 +58,8 @@ sin texto legible, sin logotipos, sin personas.
 - Volver a la caja centrada estrecha con tarjetas blancas o al hero oscuro a pantalla completa de `restaurante`.
 - Fuentes externas, dependencias nuevas o JavaScript más allá del de la cabecera.
 - Precios, cifras u opiniones fijos en los componentes: todo sale de `site.yaml` y los componentes pintan bien vacíos.
+
+## Páginas propias (fichas)
+Con la misma piel que la portada: cabecera y pie de la plantilla, migas (Inicio › Sección › Elemento), hero con la foto del
+elemento (sin foto, su icono), `detalle` en párrafos, tabla de datos, caja de contacto, galería (`imagenes`) y otros elementos
+de la misma lista.
