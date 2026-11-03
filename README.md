@@ -7,6 +7,7 @@ Web cálida y a todo color para cafeterías, brunch, pastelerías, heladerías y
 - Diseño a ancho completo: portada partida 50/50 (mostaza con título enorme y foto a sangre con sello que gira), cinta corrida, franja de fotos de borde a borde, carta en banda café con el brunch sobre mostaza, foto a sangre en «Nosotros», galería tipo Instagram sin márgenes, horario en cifras enormes sobre mostaza, cita gigante, encargos con foto a sangre, contacto partido y pie espresso con festón de toldo. Tipografía redondeada muy pesada del sistema y botones píldora. Detalle en `DISEÑO.md`.
 - Ejemplo: Café Almendro, cafetería ficticia en el Realejo de Granada.
 - SEO de base incluido (`src/lib/seo.ts`): canónica, og:image, JSON-LD (`CafeOrCoffeeShop`) y preguntas frecuentes, `robots.txt`, `sitemap.xml` y `llms.txt`; `noindex` si `seo.indexable: false`.
+- Varias páginas (opcional, `paginas:` en la raíz de `site.yaml`): Inicio + una página por entrada (`{ ruta, titulo, secciones: "a; b" }`, hasta 6) con el menú hecho solo; reparto recomendado en `template.yaml → paginas`. Sin la clave, una sola página larga.
 - Contenido editable en `site.yaml`; metadatos y guion del asistente en `template.yaml`; reglas para el agente en `CLAUDE.md`; fotos a generar en `fotos.json` (13).
 
 ## Campos propios

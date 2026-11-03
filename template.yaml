@@ -21,11 +21,18 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: calido
 plan_minimo: gratis
-version: 1.1.0
+version: 1.2.0
 base: astrowind
 demo_url: https://demo-plantilla-cafeteria-brunch.noexpertise.com
 activa: true
 orden: 220
+
+# Varias páginas (docs/plantillas.md § Varias páginas): reparto recomendado al activar «Varias páginas».
+# Inicio se queda con la portada y lo que no esté en ninguna página (aquí, el local, fotos).
+paginas:
+  - { ruta: carta, titulo: Carta, secciones: "carta" }
+  - { ruta: el-local, titulo: El local, secciones: "sobre; opiniones" }
+  - { ruta: contacto, titulo: Contacto, secciones: "horario; encargos; preguntas; contacto" }
 
 # Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
 # tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
